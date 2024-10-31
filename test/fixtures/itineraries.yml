@@ -1,0 +1,11 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  time: 2024-10-31 12:23:08
+  description: MyText
+  event: one
+
+two:
+  time: 2024-10-31 12:23:08
+  description: MyText
+  event: two
