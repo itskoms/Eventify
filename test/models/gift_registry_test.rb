@@ -3,9 +3,6 @@
 # Table name: gift_registries
 #
 #  id         :integer          not null, primary key
-#  item_name  :string
-#  link       :string
-#  price      :decimal(, )
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #  event_id   :integer          not null

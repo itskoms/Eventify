@@ -21,6 +21,8 @@
 #  event_id  (event_id => events.id)
 #
 class Guest < ApplicationRecord
+  has_many :guest_lists, dependent: :destroy
   has_many :events, through: :guest_lists
-  has_many :guest_list
+  has_many :gift_registries
+  has_many :gifts, through: :gift_registries
 end

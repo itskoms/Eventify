@@ -3,8 +3,10 @@
 # Table name: itineraries
 #
 #  id          :integer          not null, primary key
+#  date        :datetime
 #  description :text
-#  time        :datetime
+#  end_time    :datetime
+#  start_time  :datetime
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #  event_id    :integer          not null
@@ -19,4 +21,5 @@
 #
 class Itinerary < ApplicationRecord
   belongs_to :event
+  has_many :itinerary_actions, dependent: :destroy
 end
