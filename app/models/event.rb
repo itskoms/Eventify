@@ -12,8 +12,10 @@
 #
 class Event < ApplicationRecord
     has_many :budget
-    has_many :guests
+    has_and_belongs_to_many :guests
+    has_one :guest_list
     has_many :gift_registry
     has_many :itinerary
     has_many :notification
+    
 end

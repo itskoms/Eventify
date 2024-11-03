@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_10_31_162326) do
+ActiveRecord::Schema[7.2].define(version: 2024_11_03_191613) do
   create_table "budgets", force: :cascade do |t|
     t.decimal "amount"
     t.text "description"
@@ -39,12 +39,25 @@ ActiveRecord::Schema[7.2].define(version: 2024_10_31_162326) do
     t.index ["event_id"], name: "index_gift_registries_on_event_id"
   end
 
-  create_table "guests", force: :cascade do |t|
-    t.string "name"
+  create_table "guest_lists", force: :cascade do |t|
+    t.integer "guest_id", null: false
+    t.integer "event_id", null: false
     t.string "rsvp_status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["event_id"], name: "index_guest_lists_on_event_id"
+    t.index ["guest_id"], name: "index_guest_lists_on_guest_id"
+  end
+
+  create_table "guests", force: :cascade do |t|
+    t.string "first_name"
     t.integer "event_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "last_name"
+    t.integer "party_size", null: false
+    t.string "phone"
+    t.string "email"
     t.index ["event_id"], name: "index_guests_on_event_id"
   end
 
@@ -67,6 +80,8 @@ ActiveRecord::Schema[7.2].define(version: 2024_10_31_162326) do
 
   add_foreign_key "budgets", "events"
   add_foreign_key "gift_registries", "events"
+  add_foreign_key "guest_lists", "events"
+  add_foreign_key "guest_lists", "guests"
   add_foreign_key "guests", "events"
   add_foreign_key "itineraries", "events"
   add_foreign_key "notifications", "events"
