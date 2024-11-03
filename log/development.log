@@ -213,3 +213,299 @@ FOREIGN KEY ("event_id")
   [1m[36mTRANSACTION (3.0ms)[0m  [1m[36mcommit transaction[0m
   [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
   [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to RenameTableGiftRegistries (20241103195453)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (1.7ms)[0m  [1m[35mALTER TABLE "gift_registries" RENAME TO "gifts"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_gifts_on_event_id" ON "gifts" ("event_id")[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mDROP INDEX "index_gift_registries_on_event_id"[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20241103195453') RETURNING "version"[0m
+  [1m[36mTRANSACTION (2.7ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to CreateGiftRegistries (20241103200352)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (1.3ms)[0m  [1m[35mCREATE TABLE "gift_registries" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "event_id" integer NOT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, CONSTRAINT "fk_rails_307e014658"
+FOREIGN KEY ("event_id")
+  REFERENCES "events" ("id")
+)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_gift_registries_on_event_id" ON "gift_registries" ("event_id")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20241103200352') RETURNING "version"[0m
+  [1m[36mTRANSACTION (3.1ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to AddGiftRegistryToGifts (20241103200946)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TEMPORARY TABLE "agifts" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "item_name" varchar, "price" decimal, "link" varchar, "event_id" integer NOT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "tindex_agifts_on_event_id" ON "agifts" ("event_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[32mINSERT INTO "agifts" ("id","item_name","price","link","event_id","created_at","updated_at")
+                     SELECT "id","item_name","price","link","event_id","created_at","updated_at" FROM "gifts"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE "gifts"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "gifts" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "item_name" varchar, "price" decimal, "link" varchar, "event_id" integer NOT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "gift_registry_id" integer NOT NULL, CONSTRAINT "fk_rails_5f98f983da"
+FOREIGN KEY ("event_id")
+  REFERENCES "events" ("id")
+)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_gifts_on_event_id" ON "gifts" ("event_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[32mINSERT INTO "gifts" ("id","item_name","price","link","event_id","created_at","updated_at")
+                     SELECT "id","item_name","price","link","event_id","created_at","updated_at" FROM "agifts"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE "agifts"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_gifts_on_gift_registry_id" ON "gifts" ("gift_registry_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TEMPORARY TABLE "agifts" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "item_name" varchar, "price" decimal, "link" varchar, "event_id" integer NOT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "gift_registry_id" integer NOT NULL)[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE INDEX "tindex_agifts_on_gift_registry_id" ON "agifts" ("gift_registry_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "tindex_agifts_on_event_id" ON "agifts" ("event_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "agifts" ("id","item_name","price","link","event_id","created_at","updated_at","gift_registry_id")
+                     SELECT "id","item_name","price","link","event_id","created_at","updated_at","gift_registry_id" FROM "gifts"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE "gifts"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "gifts" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "item_name" varchar, "price" decimal, "link" varchar, "event_id" integer NOT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "gift_registry_id" integer NOT NULL, CONSTRAINT "fk_rails_5f98f983da"
+FOREIGN KEY ("event_id")
+  REFERENCES "events" ("id")
+, CONSTRAINT "fk_rails_fd7909b628"
+FOREIGN KEY ("gift_registry_id")
+  REFERENCES "gift_registries" ("id")
+)[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "index_gifts_on_event_id" ON "gifts" ("event_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "index_gifts_on_gift_registry_id" ON "gifts" ("gift_registry_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "gifts" ("id","item_name","price","link","event_id","created_at","updated_at","gift_registry_id")
+                     SELECT "id","item_name","price","link","event_id","created_at","updated_at","gift_registry_id" FROM "agifts"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE "agifts"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20241103200946') RETURNING "version"[0m
+  [1m[36mTRANSACTION (10.2ms)[0m  [1m[36mcommit transaction[0m
+Migrating to AddPurchasedAttributeToGifts (20241103201129)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (2.4ms)[0m  [1m[35mALTER TABLE "gifts" ADD "purchased" boolean DEFAULT 0[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20241103201129') RETURNING "version"[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mcommit transaction[0m
+Migrating to AddGuestToGifts (20241103201319)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TEMPORARY TABLE "agifts" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "item_name" varchar, "price" decimal, "link" varchar, "event_id" integer NOT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "gift_registry_id" integer NOT NULL, "purchased" boolean DEFAULT 0)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "tindex_agifts_on_gift_registry_id" ON "agifts" ("gift_registry_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "tindex_agifts_on_event_id" ON "agifts" ("event_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[32mINSERT INTO "agifts" ("id","item_name","price","link","event_id","created_at","updated_at","gift_registry_id","purchased")
+                     SELECT "id","item_name","price","link","event_id","created_at","updated_at","gift_registry_id","purchased" FROM "gifts"[0m
+  [1m[35m (0.3ms)[0m  [1m[35mDROP TABLE "gifts"[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE TABLE "gifts" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "item_name" varchar, "price" decimal, "link" varchar, "event_id" integer NOT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "gift_registry_id" integer NOT NULL, "purchased" boolean DEFAULT 0, "guest_id" integer NOT NULL, CONSTRAINT "fk_rails_fd7909b628"
+FOREIGN KEY ("gift_registry_id")
+  REFERENCES "gift_registries" ("id")
+, CONSTRAINT "fk_rails_5f98f983da"
+FOREIGN KEY ("event_id")
+  REFERENCES "events" ("id")
+)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_gifts_on_event_id" ON "gifts" ("event_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_gifts_on_gift_registry_id" ON "gifts" ("gift_registry_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "gifts" ("id","item_name","price","link","event_id","created_at","updated_at","gift_registry_id","purchased")
+                     SELECT "id","item_name","price","link","event_id","created_at","updated_at","gift_registry_id","purchased" FROM "agifts"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE "agifts"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_gifts_on_guest_id" ON "gifts" ("guest_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TEMPORARY TABLE "agifts" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "item_name" varchar, "price" decimal, "link" varchar, "event_id" integer NOT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "gift_registry_id" integer NOT NULL, "purchased" boolean DEFAULT 0, "guest_id" integer NOT NULL)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "tindex_agifts_on_guest_id" ON "agifts" ("guest_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "tindex_agifts_on_gift_registry_id" ON "agifts" ("gift_registry_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "tindex_agifts_on_event_id" ON "agifts" ("event_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "agifts" ("id","item_name","price","link","event_id","created_at","updated_at","gift_registry_id","purchased","guest_id")
+                     SELECT "id","item_name","price","link","event_id","created_at","updated_at","gift_registry_id","purchased","guest_id" FROM "gifts"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE "gifts"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "gifts" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "item_name" varchar, "price" decimal, "link" varchar, "event_id" integer NOT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "gift_registry_id" integer NOT NULL, "purchased" boolean DEFAULT 0, "guest_id" integer NOT NULL, CONSTRAINT "fk_rails_5f98f983da"
+FOREIGN KEY ("event_id")
+  REFERENCES "events" ("id")
+, CONSTRAINT "fk_rails_fd7909b628"
+FOREIGN KEY ("gift_registry_id")
+  REFERENCES "gift_registries" ("id")
+, CONSTRAINT "fk_rails_02cdf37f9a"
+FOREIGN KEY ("guest_id")
+  REFERENCES "guests" ("id")
+)[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "index_gifts_on_event_id" ON "gifts" ("event_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "index_gifts_on_gift_registry_id" ON "gifts" ("gift_registry_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "index_gifts_on_guest_id" ON "gifts" ("guest_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "gifts" ("id","item_name","price","link","event_id","created_at","updated_at","gift_registry_id","purchased","guest_id")
+                     SELECT "id","item_name","price","link","event_id","created_at","updated_at","gift_registry_id","purchased","guest_id" FROM "agifts"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE "agifts"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20241103201319') RETURNING "version"[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to EditBudgetTable (20241103223807)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE TEMPORARY TABLE "abudgets" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "total_budget" decimal, "description" text, "event_id" integer NOT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "tindex_abudgets_on_event_id" ON "abudgets" ("event_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[32mINSERT INTO "abudgets" ("id","total_budget","description","event_id","created_at","updated_at")
+                     SELECT "id","amount","description","event_id","created_at","updated_at" FROM "budgets"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mDROP TABLE "budgets"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "budgets" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "total_budget" decimal, "description" text, "event_id" integer NOT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, CONSTRAINT "fk_rails_c812fd6096"
+FOREIGN KEY ("event_id")
+  REFERENCES "events" ("id")
+)[0m
+  [1m[35m (0.5ms)[0m  [1m[35mCREATE INDEX "index_budgets_on_event_id" ON "budgets" ("event_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[32mINSERT INTO "budgets" ("id","total_budget","description","event_id","created_at","updated_at")
+                     SELECT "id","total_budget","description","event_id","created_at","updated_at" FROM "abudgets"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mDROP TABLE "abudgets"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20241103223807') RETURNING "version"[0m
+  [1m[36mTRANSACTION (10.9ms)[0m  [1m[36mcommit transaction[0m
+Migrating to CreateBudgetTransactions (20241103224144)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (2.7ms)[0m  [1m[35mCREATE TABLE "budget_transactions" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "event_id" integer NOT NULL, "description" varchar, "amount" decimal, "budget_id" integer NOT NULL, "transactionType" varchar, "category" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, CONSTRAINT "fk_rails_d7d56d2206"
+FOREIGN KEY ("event_id")
+  REFERENCES "events" ("id")
+, CONSTRAINT "fk_rails_07c8befe5a"
+FOREIGN KEY ("budget_id")
+  REFERENCES "budgets" ("id")
+)[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE INDEX "index_budget_transactions_on_event_id" ON "budget_transactions" ("event_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_budget_transactions_on_budget_id" ON "budget_transactions" ("budget_id")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20241103224144') RETURNING "version"[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[36mcommit transaction[0m
+Migrating to AddDateToBudgetTransctions (20241103224239)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (2.0ms)[0m  [1m[35mALTER TABLE "budget_transctions" ADD "date" datetime(6)[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to UpdateBudgetTransactionsTable (20241103224433)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE TEMPORARY TABLE "abudget_transactions" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "event_id" integer NOT NULL, "description" varchar, "amount" decimal, "budget_id" integer NOT NULL, "transaction_type" varchar, "category" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "tindex_abudget_transactions_on_budget_id" ON "abudget_transactions" ("budget_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "tindex_abudget_transactions_on_event_id" ON "abudget_transactions" ("event_id")[0m
+  [1m[35m (0.2ms)[0m  [1m[32mINSERT INTO "abudget_transactions" ("id","name","event_id","description","amount","budget_id","transaction_type","category","created_at","updated_at")
+                     SELECT "id","name","event_id","description","amount","budget_id","transactionType","category","created_at","updated_at" FROM "budget_transactions"[0m
+  [1m[35m (0.3ms)[0m  [1m[35mDROP TABLE "budget_transactions"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "budget_transactions" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "event_id" integer NOT NULL, "description" varchar, "amount" decimal, "budget_id" integer NOT NULL, "transaction_type" varchar, "category" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, CONSTRAINT "fk_rails_07c8befe5a"
+FOREIGN KEY ("budget_id")
+  REFERENCES "budgets" ("id")
+, CONSTRAINT "fk_rails_d7d56d2206"
+FOREIGN KEY ("event_id")
+  REFERENCES "events" ("id")
+)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_budget_transactions_on_event_id" ON "budget_transactions" ("event_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_budget_transactions_on_budget_id" ON "budget_transactions" ("budget_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[32mINSERT INTO "budget_transactions" ("id","name","event_id","description","amount","budget_id","transaction_type","category","created_at","updated_at")
+                     SELECT "id","name","event_id","description","amount","budget_id","transaction_type","category","created_at","updated_at" FROM "abudget_transactions"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mDROP TABLE "abudget_transactions"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to UpdateBudgetTransactionsTable (20241103224433)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE TEMPORARY TABLE "abudget_transactions" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "event_id" integer NOT NULL, "description" varchar, "amount" decimal, "budget_id" integer NOT NULL, "transaction_type" varchar, "category" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "tindex_abudget_transactions_on_budget_id" ON "abudget_transactions" ("budget_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "tindex_abudget_transactions_on_event_id" ON "abudget_transactions" ("event_id")[0m
+  [1m[35m (0.2ms)[0m  [1m[32mINSERT INTO "abudget_transactions" ("id","name","event_id","description","amount","budget_id","transaction_type","category","created_at","updated_at")
+                     SELECT "id","name","event_id","description","amount","budget_id","transactionType","category","created_at","updated_at" FROM "budget_transactions"[0m
+  [1m[35m (0.3ms)[0m  [1m[35mDROP TABLE "budget_transactions"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE TABLE "budget_transactions" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "event_id" integer NOT NULL, "description" varchar, "amount" decimal, "budget_id" integer NOT NULL, "transaction_type" varchar, "category" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, CONSTRAINT "fk_rails_07c8befe5a"
+FOREIGN KEY ("budget_id")
+  REFERENCES "budgets" ("id")
+, CONSTRAINT "fk_rails_d7d56d2206"
+FOREIGN KEY ("event_id")
+  REFERENCES "events" ("id")
+)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_budget_transactions_on_event_id" ON "budget_transactions" ("event_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_budget_transactions_on_budget_id" ON "budget_transactions" ("budget_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "budget_transactions" ("id","name","event_id","description","amount","budget_id","transaction_type","category","created_at","updated_at")
+                     SELECT "id","name","event_id","description","amount","budget_id","transaction_type","category","created_at","updated_at" FROM "abudget_transactions"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE "abudget_transactions"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[35m (0.4ms)[0m  [1m[35mALTER TABLE "budget_transactions" ADD "date" datetime(6)[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20241103224433') RETURNING "version"[0m
+  [1m[36mTRANSACTION (1.3ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to EditItineraryTable (20241103230919)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (1.5ms)[0m  [1m[35mALTER TABLE "itineraries" ADD "start_time" datetime(6)[0m
+  [1m[35m (0.2ms)[0m  [1m[35mALTER TABLE "itineraries" ADD "end_time" datetime(6)[0m
+  [1m[35m (0.2ms)[0m  [1m[35mALTER TABLE "itineraries" ADD "date" datetime(6)[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.2ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TEMPORARY TABLE "aitineraries" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "time" datetime(6), "description" text, "event_id" integer NOT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "start_time" datetime(6), "end_time" datetime(6), "date" datetime(6))[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "tindex_aitineraries_on_event_id" ON "aitineraries" ("event_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[32mINSERT INTO "aitineraries" ("id","time","description","event_id","created_at","updated_at","start_time","end_time","date")
+                     SELECT "id","time","description","event_id","created_at","updated_at","start_time","end_time","date" FROM "itineraries"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mDROP TABLE "itineraries"[0m
+  [1m[35m (0.9ms)[0m  [1m[35mCREATE TABLE "itineraries" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "description" text, "event_id" integer NOT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "start_time" datetime(6), "end_time" datetime(6), "date" datetime(6), CONSTRAINT "fk_rails_7dda9619a9"
+FOREIGN KEY ("event_id")
+  REFERENCES "events" ("id")
+)[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE INDEX "index_itineraries_on_event_id" ON "itineraries" ("event_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[32mINSERT INTO "itineraries" ("id","description","event_id","created_at","updated_at","start_time","end_time","date")
+                     SELECT "id","description","event_id","created_at","updated_at","start_time","end_time","date" FROM "aitineraries"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE "aitineraries"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20241103230919') RETURNING "version"[0m
+  [1m[36mTRANSACTION (1.5ms)[0m  [1m[36mcommit transaction[0m
+Migrating to CreateItineraryActions (20241103231412)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (1.4ms)[0m  [1m[35mCREATE TABLE "itinerary_actions" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "start_time" datetime(6) NOT NULL, "end_time" datetime(6) NOT NULL, "name" varchar, "description" varchar, "itinerary_id" integer NOT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, CONSTRAINT "fk_rails_124cbd3361"
+FOREIGN KEY ("itinerary_id")
+  REFERENCES "itineraries" ("id")
+)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_itinerary_actions_on_itinerary_id" ON "itinerary_actions" ("itinerary_id")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20241103231412') RETURNING "version"[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m

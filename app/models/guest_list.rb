@@ -20,6 +20,6 @@
 #  guest_id  (guest_id => guests.id)
 #
 class GuestList < ApplicationRecord
-  has_many :guest dependent: :destroy
+  has_many :guests, dependent: :destroy
   belongs_to :event
 end

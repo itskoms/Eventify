@@ -11,11 +11,16 @@
 #  updated_at  :datetime         not null
 #
 class Event < ApplicationRecord
-    has_many :budget
-    has_and_belongs_to_many :guests
-    has_one :guest_list
-    has_many :gift_registry
-    has_many :itinerary
-    has_many :notification
+    has_one :budget, dependent: :destroy
+    has_one :guest_list, dependent: :destroy
+    has_one :gift_registry, dependent: :destroy
+    has_one :itinerary, dependent: :destroy
+
+    has_and_belongs_to_many :guests, dependent: :destroy
+    
+    has_many :budget_transactions, through: :budget, dependent: :destroy
+    has_many :gifts, through: :gift_registry, dependent: :destroy
+    has_many :itinerary_actions, through: :itinerary, dependent: :destroy
+    has_many :notifications, dependent: :destroy
     
 end
