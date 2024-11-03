@@ -2,12 +2,15 @@
 #
 # Table name: guests
 #
-#  id          :integer          not null, primary key
-#  name        :string
-#  rsvp_status :string
-#  created_at  :datetime         not null
-#  updated_at  :datetime         not null
-#  event_id    :integer          not null
+#  id         :integer          not null, primary key
+#  email      :string
+#  first_name :string
+#  last_name  :string
+#  party_size :integer          not null
+#  phone      :string
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#  event_id   :integer          not null
 #
 # Indexes
 #
