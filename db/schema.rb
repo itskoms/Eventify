@@ -10,7 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< Updated upstream
 ActiveRecord::Schema[7.2].define(version: 2024_11_03_232626) do
+=======
+ActiveRecord::Schema[7.2].define(version: 2024_11_07_154626) do
+>>>>>>> Stashed changes
   create_table "budget_transactions", force: :cascade do |t|
     t.string "name"
     t.integer "event_id", null: false
@@ -44,6 +48,13 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_03_232626) do
     t.datetime "updated_at", null: false
     t.datetime "start_time"
     t.datetime "end_time"
+  end
+
+  create_table "events_guests", id: false, force: :cascade do |t|
+    t.integer "event_id", null: false
+    t.integer "guest_id", null: false
+    t.index ["event_id"], name: "index_events_guests_on_event_id"
+    t.index ["guest_id"], name: "index_events_guests_on_guest_id"
   end
 
   create_table "gift_registries", force: :cascade do |t|
@@ -118,6 +129,18 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_03_232626) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["event_id"], name: "index_notifications_on_event_id"
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
   add_foreign_key "budget_transactions", "budgets"

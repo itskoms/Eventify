@@ -1,0 +1,72 @@
+<!-- app/views/guests/index.html.erb -->
+
+<div class="container mt-5">
+  <% if @guests %>
+    <!-- Guest List View: Shows all guests for a specific event -->
+    <h2 class="mb-4">Guest List for <%= @event.title %></h2>
+    
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Email</th>
+          <th>RSVP Status</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @guests.each do |guest| %>
+          <tr>
+            <td><%= guest.name %></td>  <!-- Displays guest name -->
+            <td><%= guest.email %></td>  <!-- Displays guest email -->
+            <td><%= guest.guest_lists.find_by(event_id: @event.id).rsvp_status %></td>  <!-- Shows RSVP status -->
+
+            <td>
+              <!-- Form to update attendance, with a dropdown to select attendance status -->
+              <%= form_with url: update_attendance_event_guest_path(@event, guest), method: :patch, local: true do |f| %>
+                <%= f.select :attending, options_for_select([['Yes', 'yes'], ['No', 'no']], guest.guest_lists.find_by(event_id: @event.id).rsvp_status), {}, { class: "form-select" } %>
+                <%= f.submit "Update", class: "btn btn-primary btn-sm ml-2" %>
+              <% end %>
+
+              <!-- Link to remove guest from the event with confirmation prompt -->
+              <%= link_to 'Remove', event_guest_path(@event, guest), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger btn-sm ml-2" %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    
+  <% elsif @events %>
+    <!-- Guest View: Shows all events the current user is invited to -->
+    <h2 class="mb-4">Events You're Invited To</h2>
+    
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Event</th>
+          <th>Date</th>
+          <th>Location</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @events.each do |event| %>
+          <tr>
+            <td><%= event.title %></td>  <!-- Displays event title -->
+            <td><%= event.date.strftime("%B %d, %Y") %></td>  <!-- Formats and displays event date -->
+            <td><%= event.location %></td>  <!-- Displays event location -->
+
+            <td>
+              <!-- Link to view guest list for this event -->
+              <%= link_to 'View Guest List', event_guests_path(event), class: "btn btn-info btn-sm" %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    
+  <% else %>
+    <!-- Message for cases with no data (optional) -->
+    <p>No guests or events found.</p>
+  <% end %>
+</div>

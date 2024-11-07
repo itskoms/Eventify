@@ -1,0 +1,24 @@
+<!-- app/views/guest_lists/index.html.erb -->
+
+<div class="container mt-5">
+  <h2 class="mb-4">Guest List for <%= @event.title %></h2>  <!-- Displays the event title -->
+  
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>RSVP Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @guests.each do |guest| %>
+        <tr>
+          <td><%= guest.name %></td>  <!-- Displays guest name -->
+          <td><%= guest.email %></td>  <!-- Displays guest email -->
+          <td><%= guest.guest_lists.find_by(event_id: @event.id).rsvp_status %></td>  <!-- Shows RSVP status for this event -->
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

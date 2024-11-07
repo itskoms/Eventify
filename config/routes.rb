@@ -1,9 +1,10 @@
 Rails.application.routes.draw do
+  get "guest_lists/index"
+  get "guest_lists/update_attendance"
+  get "guest_lists/destroy"
+  devise_for :users
+  # config/routes.rb
   resources :events do
-    resources :guest_lists
-    resources :budgets
-    resources :itineraries
-    resources :gift_registries
-    resources :notifications 
+    resources :guests, :budgets, :itineraries, :gift_registries, :notifications
   end
 end

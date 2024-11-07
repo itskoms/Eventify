@@ -1,6 +1,16 @@
 class GuestsController < ApplicationController
+  before_action :authenticate_user!
+  before_action :set_event, only: [:update_attendance, :destroy]
+  
+  
   def index
-    @events = Event.joins(:guest_lists).where(guest_lists: { guest_id: current_user.id })
+
+    if params[:event_id]
+      @events = Event.find(params[:event_id])
+      @guests = @events.guests
+    else 
+      @events = Event.joins(:guest_lists).where(guest_lists: { guest_id: current_user.id })
+    end
   end
 
   def update_attendance
@@ -22,5 +32,11 @@ class GuestsController < ApplicationController
     else
       redirect_to guests_path, alert: 'Failed to remove event.'
     end
+  end
+
+  private
+
+  def set_event
+    @event = Event.find(params[:event_id]) if params[:event_id]
   end
 end
