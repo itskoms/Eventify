@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
   resources :events do
-    resources :guests, :budgets, :itineraries, :gift_registries, :notifications
+    resources :guest_lists
+    resources :budgets
+    resources :itineraries
+    resources :gift_registries
+    resources :notifications 
   end
 end
