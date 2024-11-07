@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_11_03_231412) do
+ActiveRecord::Schema[7.2].define(version: 2024_11_03_232626) do
   create_table "budget_transactions", force: :cascade do |t|
     t.string "name"
     t.integer "event_id", null: false
@@ -42,6 +42,8 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_03_231412) do
     t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "start_time"
+    t.datetime "end_time"
   end
 
   create_table "gift_registries", force: :cascade do |t|
