@@ -32,7 +32,7 @@ gem "tzinfo-data", platforms: %i[ windows jruby ]
 gem "bootsnap", require: false
 
 # Use bootstrap to design frontend
-gem 'bootstrap', '~> 5.2.0'
+gem "bootstrap", "~> 5.2.0"
 
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
