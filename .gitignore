@@ -49,3 +49,6 @@
 .byebug_history
 log/development.log
 
+
+/app/assets/builds/*
+!/app/assets/builds/.keep

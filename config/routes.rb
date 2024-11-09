@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get "home/index"
   root "home#index"
 
   get "login/guest", to: "sessions#new_guest", as: "new_guest_session"
