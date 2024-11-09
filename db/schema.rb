@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_11_03_232626) do
+ActiveRecord::Schema[7.2].define(version: 2024_11_09_002158) do
   create_table "budget_transactions", force: :cascade do |t|
     t.string "name"
     t.integer "event_id", null: false
@@ -87,6 +87,8 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_03_232626) do
     t.integer "party_size", null: false
     t.string "phone"
     t.string "email"
+    t.string "password_digest", default: "", null: false
+    t.index ["email"], name: "index_guests_on_email", unique: true
     t.index ["event_id"], name: "index_guests_on_event_id"
   end
 
@@ -118,6 +120,16 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_03_232626) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["event_id"], name: "index_notifications_on_event_id"
+  end
+
+  create_table "organizers", force: :cascade do |t|
+    t.string "email", default: "", null: false
+    t.string "password_digest", default: "", null: false
+    t.string "first_name"
+    t.string "last_name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["email"], name: "index_organizers_on_email", unique: true
   end
 
   add_foreign_key "budget_transactions", "budgets"

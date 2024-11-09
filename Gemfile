@@ -28,12 +28,13 @@ gem "jbuilder"
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem "tzinfo-data", platforms: %i[ windows jruby ]
 
+gem "bcrypt", "~> 3.1.7"
+
 # Reduces boot times through caching; required in config/boot.rb
 gem "bootsnap", require: false
 
 # Use bootstrap to design frontend
 gem "bootstrap", "~> 5.3.3"
-
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"

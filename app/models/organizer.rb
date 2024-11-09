@@ -1,0 +1,22 @@
+# == Schema Information
+#
+# Table name: organizers
+#
+#  id              :integer          not null, primary key
+#  email           :string           default(""), not null
+#  first_name      :string
+#  last_name       :string
+#  password_digest :string           default(""), not null
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
+#
+# Indexes
+#
+#  index_organizers_on_email  (email) UNIQUE
+#
+class Organizer < ApplicationRecord
+  has_secure_password
+  has_many :events
+
+  validates :email, presence: true, uniqueness: true
+end
