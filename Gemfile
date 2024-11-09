@@ -34,8 +34,7 @@ gem "bcrypt", "~> 3.1.7"
 gem "bootsnap", require: false
 
 # Use bootstrap to design frontend
-gem "bootstrap", "~> 5.2.0"
-
+gem "bootstrap", "~> 5.3.3"
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"
