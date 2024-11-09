@@ -47,3 +47,5 @@
 /public/packs
 /node_modules
 .byebug_history
+log/development.log
+
