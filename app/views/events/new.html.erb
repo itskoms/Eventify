@@ -48,3 +48,11 @@
 <% end %>
 
 <%= link_to 'Back to Events', events_path %>
+
+<!-- app/views/events/show.html.erb -->
+<h1><%= @event.title %></h1>
+<p><%= @event.description %></p>
+
+<div id="guest-list">
+  <%= render 'guest_lists/guest_list', locals: { guests: @event.guests, event: @event } %>
+</div>

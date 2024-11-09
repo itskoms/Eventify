@@ -13,6 +13,7 @@ class EventsController < ApplicationController
 
     def new
         @event = Event.new
+        @guests = @event.guests
     end
 
     def create
@@ -42,10 +43,22 @@ class EventsController < ApplicationController
     end
 
     def destroy
-        @event.destroy!
-         redirect_to events_path, notice: 'Event was successfully deleted.'
+      @event.destroy!
+      redirect_to events_path, notice: 'Event was successfully deleted.'
     rescue ActiveRecord::RecordNotDestroyed => e
-        redirect_to events_path, alert: 'Event could not be deleted: ' + e.message
+      redirect_to events_path, alert: 'Event could not be deleted: ' + e.message
+    end
+
+
+    def add_guest
+      @guest = Guest.find_or_create_by(guest_params)  # Finds or creates a guest based on the params
+  
+      if @guest.persisted?
+        @event.guests << @guest unless @event.guests.include?(@guest)  # Adds guest to the event if not already added
+        redirect_to @event, notice: 'Guest was successfully added to the event.'
+      else
+        redirect_to @event, alert: 'Failed to add guest to the event: ' + @guest.errors.full_messages.join(", ")
+      end
     end
 
     private
