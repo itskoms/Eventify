@@ -1,5 +1,5 @@
-<h1>Create a Guest Account</h1>
-<%= form_with model: @guest, url: guest_registrations_path, local: true do |form| %>
+<h1>Create an Organizer Account</h1>
+<%= form_with model: @organizer, url: organizer_registrations_path, local: true do |form| %>
   <%= form.label :email %>
   <%= form.email_field :email %>
   <%= form.label :password %>
