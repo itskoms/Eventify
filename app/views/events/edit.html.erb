@@ -1,4 +1,4 @@
-<h1>Create a New Event</h1>
+<h1>Edit Event</h1>
 
 <%= form_with model: @event, local: true do |form| %>
   <% if @event.errors.any? %>
@@ -43,8 +43,8 @@
   </div>
 
   <div class="actions">
-    <%= form.submit "Create Event" %>
+    <%= form.submit "Update Event" %>
   </div>
 <% end %>
 
-<%= link_to 'Back to Events', events_path %>
+<%= link_to 'Back to Event', @event %>
