@@ -22,7 +22,7 @@ class SessionsController < ApplicationController
     organizer = Organizer.find_by(email: params[:email])
     if organizer&.authenticate(params[:password])
       session[:organizer_id] = organizer.id
-      redirect_to organizer_home_path, notice: "Logged in successfully."
+      redirect_to events_path, notice: "Logged in successfully."
     else
       flash.now[:alert] = "Invalid email or password"
       render :new_organizer

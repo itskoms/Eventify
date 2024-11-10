@@ -1,5 +1,6 @@
 class EventsController < ApplicationController
-    before_action :authenticate_user!
+    # before_action :authorize_guest!, only: [:show]
+    # before_action :authorize_organizer!, except: [:show]
     before_action :set_event, only: [:show, :edit, :update, :destroy]
 
     def index
@@ -7,7 +8,7 @@ class EventsController < ApplicationController
     end 
 
     def show
-        @event
+        @event = Event.find(params[:id])
     end
 
     def new
@@ -51,8 +52,23 @@ class EventsController < ApplicationController
 
     def set_event
         @event = Event.find(params[:id])
+    end
 
     def event_params
         params.require(:event).permit(:title, :date, :start_time, :end_time, :location, :description)
     end
+
+    # def authorize_guest!
+    #     # Ensure guests can only see the event (show action)
+    #     unless guest?
+    #       redirect_to events_path, alert: "You don't have permission to access this page."
+    #     end
+    #   end
+    
+    # def authorize_organizer!
+    # # Ensure only organizers can access new, edit, update, destroy actions
+    #     unless organizer?
+    #     redirect_to events_path, alert: "You must be an organizer to perform this action."
+    #     end
+    # end
 end
