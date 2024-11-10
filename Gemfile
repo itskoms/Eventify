@@ -35,6 +35,8 @@ gem "bootsnap", require: false
 
 # Use bootstrap to design frontend
 gem "bootstrap", "~> 5.3.3"
+gem 'bootstrap-icons'
+
 
 gem 'sassc-rails'
 
