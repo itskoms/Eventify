@@ -19,4 +19,5 @@ class Organizer < ApplicationRecord
   has_many :events
 
   validates :email, presence: true, uniqueness: true
+  validates :password, presence: true, length: { minimum: 6 }
 end

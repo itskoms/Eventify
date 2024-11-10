@@ -14,6 +14,9 @@ Rails.application.routes.draw do
   post "guest_registrations", to: "registrations#create_guest"
   post "organizer_registrations", to: "registrations#create_organizer"
 
+  get "guest_home", to: "home#guest_home", as: "guest_home"
+  get "organizer_home", to: "home#organizer_home", as: "organizer_home"
+
   resources :events do
     resources :guest_lists
     resources :budgets
