@@ -24,4 +24,8 @@ Rails.application.routes.draw do
     resources :gift_registries
     resources :notifications
   end
+
+  resources :guests, only: [ :index ] do
+    patch :update_attendance, on: :collection
+  end
 end

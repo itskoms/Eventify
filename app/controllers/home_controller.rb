@@ -3,7 +3,7 @@ class HomeController < ApplicationController
   end
 
   def guest_home
-    # Logic for guest home page
+    @events = Event.joins(:guest_list).where(guest_lists: { guest_id: current_user.id })
   end
 
   def organizer_home
