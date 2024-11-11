@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get "guest_lists/index"
   get "home/index"
   root "home#index"
 
@@ -18,6 +19,9 @@ Rails.application.routes.draw do
   get "organizer_home", to: "home#organizer_home", as: "organizer_home"
 
   resources :events do
+    member do
+      post 'add_guest'  # Adds a guest to a specific event
+    end
     resources :guest_lists
     resources :budgets
     resources :itineraries
@@ -28,4 +32,9 @@ Rails.application.routes.draw do
   resources :guests, only: [ :index ] do
     patch :update_attendance, on: :collection
   end
+
+  resources :events do
+    resources :guest_lists, only: [ :index ]
+  end
+  
 end

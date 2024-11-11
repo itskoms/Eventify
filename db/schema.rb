@@ -46,6 +46,13 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_10_013703) do
     t.datetime "end_time"
   end
 
+  create_table "events_guests", id: false, force: :cascade do |t|
+    t.integer "event_id", null: false
+    t.integer "guest_id", null: false
+    t.index ["event_id"], name: "index_events_guests_on_event_id"
+    t.index ["guest_id"], name: "index_events_guests_on_guest_id"
+  end
+
   create_table "gift_registries", force: :cascade do |t|
     t.integer "event_id", null: false
     t.datetime "created_at", null: false
